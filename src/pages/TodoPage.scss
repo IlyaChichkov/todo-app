@@ -1,8 +1,10 @@
 .todo{
   @apply w-[96%] my-4 p-4 min-h-[630px] md:max-w-[60%] xl:max-w-[40%] drop-shadow-xl;
+  foo: none;
 
   .todo-section{
     @apply bg-dark-blue-500 rounded-md mb-6 last:mb-0;
+    foo: none;
   }
 
   .todo-list-item{
@@ -13,14 +15,17 @@
 
   .todo-list-item:hover{
     @apply brightness-125;
+    foo: none;
   }
 
   .todo-list-item:active{
     @apply brightness-100;
+    foo: none;
   }
 
   .todo-item{
     @apply p-4 px-8;
+    foo: none;
   }
 
   .delete-icon{
@@ -29,23 +34,28 @@
   }
   .delete-icon-img{
     @apply h-[14px];
+    foo: none;
   }
 
   .delete-icon:hover{
     @apply brightness-110 scale-125;
+    foo: none;
   }
 
   .todo-task-text{
     @apply ml-2 flex-1 text-center select-auto;
+    foo: none;
   }
   .todo-checkbox{
     @apply p-3 h-[20px] w-[20px];
+    foo: none;
   }
 }
 
 $checkbox-width: 12px;
 input[type="checkbox"] {
   @apply absolute z-30 opacity-0;
+  foo: none;
 
   // Checkbox Check Icon
   & + .check {

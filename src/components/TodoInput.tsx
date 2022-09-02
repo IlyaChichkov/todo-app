@@ -11,7 +11,7 @@ function TodoInput({addTodo}: Props) {
     return (
         <form onSubmit={(e) => {
             e.preventDefault();
-            if (newTodo != '')
+            if (newTodo !== '')
                 addTodo(newTodo.toString(), todoCompleted);
             setNewTodo('');
         }} className={'todo-item'}>

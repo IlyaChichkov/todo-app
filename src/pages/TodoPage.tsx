@@ -3,6 +3,27 @@ import './TodoPage.scss'
 import TodoList from "../components/TodoList";
 import TodoInput from "../components/TodoInput";
 
+const defaultTodos =
+[
+    {id: 0, completed: false, text: 'Create new design logo'},
+    {id: 1, completed: false, text: 'Call team for a meetup for Saturday'},
+    {id: 2, completed: false, text: 'Read for 1 hour'},
+    {id: 3, completed: true, text: 'Pick up groceries'},
+]
+
+function getTodosOnCreate(){
+    try{
+        const todos = JSON.parse(localStorage.getItem('todoList') || "");
+        console.log('loaded:')
+        console.log(todos)
+        if(todos){
+            return todos;
+        }
+    } catch (e){
+        return defaultTodos;
+    }
+}
+
 class TodoItem {
     completed?: boolean
     text?: string
@@ -14,16 +35,12 @@ class TodoItem {
 }
 
 function TodoPage() {
-    const [todoList, setTodoList] = useState([
-        {id: 0, completed: false, text: 'Create new design logo'},
-        {id: 1, completed: false, text: 'Call team for a meetup for Saturday'},
-        {id: 2, completed: true, text: 'Prepare gift for Mikel\' BDay'},
-    ]);
+    const [todoList, setTodoList] = useState(getTodosOnCreate());
     const [showTodo, setShowTodo] = useState<TodoItem[]>(todoList);
     const [todoFilter, setTodoFilter] = useState('all');
 
     const addTodo = (newTodo: string, isCompleted: boolean) => {
-        setTodoList([...todoList, {id: Date.now(), completed: isCompleted, text: newTodo}])
+        setTodoList([...todoList, {id: Date.now(), completed: isCompleted, text: newTodo}]);
     }
 
     const removeTodo = (removeId: number) => {
@@ -68,9 +85,18 @@ function TodoPage() {
     }
 
     useEffect(() => {
-        console.log('use effect A')
         showFilterTodo(todoFilter.toString());
     }, [todoFilter, todoList]);
+
+    useEffect(() => {
+        SaveTodo()
+    }, [todoList]);
+
+    function SaveTodo() {
+        console.log('save')
+        console.log(todoList)
+        localStorage.setItem('todoList', JSON.stringify(todoList));
+    }
 
     return (
         <div className={'todo'}>
@@ -85,19 +111,19 @@ function TodoPage() {
                 <div className={'flex flex-row justify-between todo-item'}>
                     <p className={'text-dark-blue-200'}>{showTodo.length} items left</p>
                     <div className={'hidden md:block'}>
-                        <a className={`p-2 ${todoFilter === 'all'? 'text-main-blue-100':''}`} onClick={()=>{setTodoFilter('all')}}>All</a>
-                        <a className={`p-2 ${todoFilter === 'active'? 'text-main-blue-100':''}`} onClick={()=>{setTodoFilter('active')}}>Active</a>
-                        <a className={`p-2 ${todoFilter === 'completed'? 'text-main-blue-100':''}`} onClick={()=>{setTodoFilter('completed')}}>Completed</a>
+                        <a className={`link-btn p-2 ${todoFilter === 'all'? 'text-main-blue-100':'text-dark-blue-200'}`} onClick={()=>{setTodoFilter('all')}}>All</a>
+                        <a className={`link-btn p-2 ${todoFilter === 'active'? 'text-main-blue-100':'text-dark-blue-200'}`} onClick={()=>{setTodoFilter('active')}}>Active</a>
+                        <a className={`link-btn p-2 ${todoFilter === 'completed'? 'text-main-blue-100':'text-dark-blue-200'}`} onClick={()=>{setTodoFilter('completed')}}>Completed</a>
                     </div>
-                    <a onClick={clearCompletedTodo}>Clear completed</a>
+                    <a className={'link-btn text-dark-blue-200'} onClick={clearCompletedTodo}>Clear completed</a>
                 </div>
             </section>
             <section className={'todo-section md:hidden block'}>
                 <div className={'flex flex-row justify-center items-center todo-item'}>
                     <div>
-                        <a className={`p-2 ${todoFilter === 'all'? 'text-main-blue-100':''}`} onClick={()=>{setTodoFilter('all')}}>All</a>
-                        <a className={`p-2 ${todoFilter === 'active'? 'text-main-blue-100':''}`} onClick={()=>{setTodoFilter('active')}}>Active</a>
-                        <a className={`p-2 ${todoFilter === 'completed'? 'text-main-blue-100':''}`} onClick={()=>{setTodoFilter('completed')}}>Completed</a>
+                        <a className={`link-btn p-2 ${todoFilter === 'all'? 'text-main-blue-100':'text-dark-blue-200'}`} onClick={()=>{setTodoFilter('all')}}>All</a>
+                        <a className={`link-btn p-2 ${todoFilter === 'active'? 'text-main-blue-100':'text-dark-blue-200'}`} onClick={()=>{setTodoFilter('active')}}>Active</a>
+                        <a className={`link-btn p-2 ${todoFilter === 'completed'? 'text-main-blue-100':'text-dark-blue-200'}`} onClick={()=>{setTodoFilter('completed')}}>Completed</a>
                     </div>
                 </div>
             </section>

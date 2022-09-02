@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;700');
+@import url(https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;700);
 
 body {
   @apply bg-dark-blue-600 min-h-screen  font-quickSand;
@@ -25,13 +25,13 @@ p {
   @apply text-dark-blue-100;
 }
 
-a{
-  @apply text-dark-blue-200 font-bold text-start no-underline;
+a.link-btn{
+  @apply font-bold text-start no-underline;
 }
-a:hover{
+a:hover.link-btn{
   @apply opacity-90 cursor-pointer;
 }
-a:active{
+a:active.link-btn{
   @apply opacity-50;
 }
 

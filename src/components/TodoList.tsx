@@ -90,25 +90,13 @@ function TodoList({todoList, removeTodo, completeTodo}: TodoListProps) {
 
     const duration = 300;
 
-    const defaultStyle = {
-        transition: `opacity ${duration}ms ease-in-out`,
-        opacity: 0,
-    }
-
-    const transitionStyles = {
-        entering: { opacity: 1 },
-        entered:  { opacity: 1 },
-        exiting:  { opacity: 0 },
-        exited:  { opacity: 0 },
-    };
-
     return (
         <TransitionGroup>
             <div>
                 {todoList.length > 0 ?
                     list.map(function (todo: any, index: number) {
                         return (
-                            <CSSTransition key={todo} timeout={700} classNames="item">
+                            <CSSTransition key={todo.id} timeout={700} classNames="item">
                                 <div>
                                     <div data-position={index}
                                          draggable={true}
