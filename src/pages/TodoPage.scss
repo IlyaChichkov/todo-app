@@ -1,0 +1,126 @@
+.todo{
+  @apply w-[96%] my-4 p-4 min-h-[630px] md:max-w-[60%] xl:max-w-[40%] drop-shadow-xl;
+
+  .todo-section{
+    @apply bg-dark-blue-500 rounded-md mb-6 last:mb-0;
+  }
+
+  .todo-list-item{
+    @apply flex flex-row justify-between items-center py-2  border-b-[1px]
+    border-dark-blue-400 border-solid bg-dark-blue-500 ;
+    transition: all 20ms ease-in-out;
+  }
+
+  .todo-list-item:hover{
+    @apply brightness-125;
+  }
+
+  .todo-list-item:active{
+    @apply brightness-100;
+  }
+
+  .todo-item{
+    @apply p-4 px-8;
+  }
+
+  .delete-icon{
+    @apply w-[14px];
+    transition: background-color 20ms ease-in-out;
+  }
+  .delete-icon-img{
+    @apply h-[14px];
+  }
+
+  .delete-icon:hover{
+    @apply brightness-110 scale-125;
+  }
+
+  .todo-task-text{
+    @apply ml-2 flex-1 text-center select-auto;
+  }
+  .todo-checkbox{
+    @apply p-3 h-[20px] w-[20px];
+  }
+}
+
+$checkbox-width: 12px;
+input[type="checkbox"] {
+  @apply absolute z-30 opacity-0;
+
+  // Checkbox Check Icon
+  & + .check {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+
+    &:before{
+      content: "";
+      transition: all 230ms ease-in-out;
+      @apply absolute bg-no-repeat p-2 bg-none border-solid border-2 border-dark-blue-300 rounded-full;
+      width: $checkbox-width;
+      height: $checkbox-width;
+      top: -$checkbox-width + 2;
+    }
+  }
+
+  &:hover + .check {
+    &:before{
+      @apply brightness-125;
+    }
+  }
+
+  &:checked + .check {
+    &:before{
+      @apply z-20 bg-[url('../assets/icon-check.svg')] bg-center border-2 border-transparent;
+    }
+  }
+
+  &:hover + .check {
+    &:before{
+      @apply brightness-125;
+    }
+  }
+
+  // Checkbox Gradient
+  & ~ .gradient {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+
+    &:before{
+      content: "";
+      transition: all 230ms ease-in-out;
+      @apply absolute bg-no-repeat p-2 bg-none rounded-full border-none;
+      width: $checkbox-width + 8;
+      height: $checkbox-width + 8;
+      top: -$checkbox-width + 2;
+    }
+  }
+
+  &:checked ~ .gradient {
+    &:before{
+      @apply z-10 bg-gradient-to-tl from-gd-purple to-gd-blue bg-center;
+    }
+  }
+
+  &:hover ~ .gradient {
+    &:before{
+      @apply opacity-60;
+    }
+  }
+}
+
+.item-enter {
+  opacity: 0;
+}
+.item-enter-active {
+  opacity: 1;
+  transition: opacity 500ms ease-in;
+}
+.item-exit {
+  opacity: 1;
+}
+.item-exit-active {
+  opacity: 0;
+  transition: opacity 500ms ease-in;
+}
