@@ -24,7 +24,7 @@ Users are able to:
 - Delete todos from the list
 - Filter by all/active/complete todos
 - Clear all completed todos
-- **Bonus**: Drag and drop to reorder items on the list
+- Drag and drop to reorder items on the list
 
 ### Screenshot
 
